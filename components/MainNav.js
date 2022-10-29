@@ -1,7 +1,6 @@
 import { useState, useRouter } from 'react';
 
 import Link from 'next/link';
-
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
 
 export default function MainNav(props) {
