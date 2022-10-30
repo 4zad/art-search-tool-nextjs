@@ -29,15 +29,15 @@ export default function ArtworkCard(props) {
             <Card.Text>
               <p>
                 <strong>Date: </strong>
-                {data.objectDate}
+                {data.objectDate ? data.objectDate : 'N/A'}
               </p>
               <p>
                 <strong>Classification: </strong>
-                {data.classification}
+                {data.classification ? data.classification : 'N/A'}
               </p>
               <p>
                 <strong>Medium: </strong>
-                {data.medium}
+                {data.medium ? data.medium : 'N/A'}
               </p>
             </Card.Text>
             <Link href={`/artwork/${data.objectID}`} passHref>
