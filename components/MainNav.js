@@ -8,10 +8,10 @@ export default function MainNav(props) {
   const router = useRouter();
   const [searchField, setSearchField] = useState('');
 
-  function submitSearchField(e) {
+  const submitSearchField = (e) => {
     e.preventDefault(); // prevent the browser from automatically submitting the form
     router.push(`/artwork?title=true&q=${searchField}`);
-  }
+  };
 
   return (
     <>
