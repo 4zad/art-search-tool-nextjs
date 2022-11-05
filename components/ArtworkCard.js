@@ -56,6 +56,6 @@ export default function ArtworkCard(props) {
 }
 
 // defines default props if any properties did not recieve values when rendering component
-MainNav.defaultProps = {
+ArtworkCard.defaultProps = {
   objectID: '',
 };
