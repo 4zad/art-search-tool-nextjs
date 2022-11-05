@@ -22,8 +22,12 @@ export default function MainNav(props) {
           <Navbar.Toggle aria-controls='navbarScroll' />
           <Navbar.Collapse id='navbarScroll'>
             <Nav className='me-auto'>
-              <Nav.Link href='/'>Home</Nav.Link>
-              <Nav.Link href='/search'>Advanced Search</Nav.Link>
+              <Link href='/' passHref legacyBehavior>
+                <Nav.Link>Home</Nav.Link>
+              </Link>
+              <Link href='/search' passHref legacyBehavior>
+                <Nav.Link>Advanced Search</Nav.Link>
+              </Link>
             </Nav>
             <Form
               className='d-flex'
