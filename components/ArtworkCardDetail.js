@@ -1,11 +1,15 @@
+import useSWR from 'swr';
+
 import Error from 'next/error';
 import Link from 'next/link';
 import { Button, Card } from 'react-bootstrap';
 
 export default function ArtworkCardDetail(props) {
   const api = `https://collectionapi.metmuseum.org`;
-  const urlRequest = `/public/collection/v1/objects/${props.objectID}`;
+  const urlRequest = `${api}/public/collection/v1/objects/${props.objectID}`;
   const { data, error } = useSWR(urlRequest);
+
+  console.log(urlRequest);
 
   return (
     <>
@@ -35,7 +39,7 @@ export default function ArtworkCardDetail(props) {
                 <strong>Artist: </strong>
                 {data.artistDisplayName ? (
                   <a href={data.artistWikidata_URL} target='_blank' rel='noreferrer'>
-                    data.artistDisplayName
+                    {data.artistDisplayName}
                   </a>
                 ) : (
                   'N/A'
@@ -50,15 +54,6 @@ export default function ArtworkCardDetail(props) {
                 {data.dimensions ? data.dimensions : 'N/A'}
               </p>
             </Card.Text>
-
-            <Link href={`/artwork/${data.objectID}`} passHref>
-              <Button variant='primary'>
-                <p>
-                  <strong>ID: </strong>
-                  {data.objectID}
-                </p>
-              </Button>
-            </Link>
           </Card.Body>
         </Card>
       ) : null}
@@ -67,6 +62,6 @@ export default function ArtworkCardDetail(props) {
 }
 
 // defines default props if any properties did not recieve values when rendering component
-MainNav.defaultProps = {
+ArtworkCardDetail.defaultProps = {
   objectID: '',
 };

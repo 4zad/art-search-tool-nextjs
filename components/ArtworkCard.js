@@ -42,7 +42,7 @@ export default function ArtworkCard(props) {
                 {data.medium ? data.medium : 'N/A'}
               </p>
             </Card.Text>
-            <Link href={`/artwork/${data.objectID}`} passHref>
+            <Link href={`/artwork/${data.objectID}`} passHref legacyBehavior>
               <Button variant='primary'>
                 <p>
                   <strong>ID: </strong>
