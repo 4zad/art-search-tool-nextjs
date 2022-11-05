@@ -10,7 +10,7 @@ import ArtworkCard from '../../components/ArtworkCard';
 const PER_PAGE = 12;
 
 export default function Artwork() {
-  const [artworkList, setArtworkList] = useState(); // holds 2D array of values where each index in the outer array is a page and each index in the inner array is a artwork
+  const [artworkList, setArtworkList] = useState(); // holds 2D array of values where each index in the outer array is a page and each index in the inner array is a artwork object ID number from the API call
   const [page, setPage] = useState(1); // holds current page number
 
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function Artwork() {
 
   useEffect(() => {
     if (data) {
-      // splitting the data recieved from api fetch into separate arrays of length of items on each page, 'PER_PAGE'
+      // splitting the data recieved from API fetch into separate arrays of length of items on each page, 'PER_PAGE'
       let results = [];
       for (let i = 0; i < data?.objectIDs?.length; i += PER_PAGE) {
         const chunk = data?.objectIDs.slice(i, i + PER_PAGE);
@@ -51,15 +51,17 @@ export default function Artwork() {
     <>
       {error ? (
         <Error statusCode={404} />
-      ) : data ? (
+      ) : artworkList ? (
         <Row className='gy-4'>
-          {artworkList.length > 0
-            ? artworkList[page - 1].map((objID) => (
-                <Col lg={3} key={objID}>
-                  <ArtworkCard objectID={objID} />
-                </Col>
-              ))
-            : null}
+          {artworkList.length > 0 ? (
+            artworkList[page - 1].map((objID) => (
+              <Col lg={3} key={objID}>
+                <ArtworkCard objectID={objID} />
+              </Col>
+            ))
+          ) : (
+            <h4>Nothing Here</h4>
+          )}
         </Row>
       ) : null}
     </>

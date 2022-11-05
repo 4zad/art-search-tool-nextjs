@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import useSWR from 'swr';
+
 import Error from 'next/error';
 import Link from 'next/link';
 import { Button, Card } from 'react-bootstrap';
