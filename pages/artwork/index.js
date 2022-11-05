@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import Error from 'next/error';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Pagination, Row } from 'react-bootstrap';
 import ArtworkCard from '../../components/ArtworkCard';
 
 const PER_PAGE = 12;
@@ -52,17 +52,33 @@ export default function Artwork() {
       {error ? (
         <Error statusCode={404} />
       ) : artworkList ? (
-        <Row className='gy-4'>
-          {artworkList.length > 0 ? (
-            artworkList[page - 1].map((objID) => (
-              <Col lg={3} key={objID}>
-                <ArtworkCard objectID={objID} />
-              </Col>
-            ))
-          ) : (
-            <h4>Nothing Here</h4>
-          )}
-        </Row>
+        <>
+          <Row className='gy-4'>
+            {artworkList.length > 0 ? (
+              artworkList[page - 1].map((objID) => (
+                <Col lg={3} key={objID}>
+                  <ArtworkCard objectID={objID} />
+                </Col>
+              ))
+            ) : (
+              <Card>
+                <Card.Body>
+                  <h4>Nothing Here</h4>
+                </Card.Body>
+              </Card>
+            )}
+          </Row>
+
+          <Row className='gy-4'>
+            {artworkList.length > 0 ? (
+              <Pagination /*size='lg'*/>
+                <Pagination.Prev onClick={() => previousPage()} />
+                <Pagination.Item active>{page}</Pagination.Item>
+                <Pagination.Next onClick={() => nextPage()} />
+              </Pagination>
+            ) : null}
+          </Row>
+        </>
       ) : null}
     </>
   );
