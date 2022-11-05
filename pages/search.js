@@ -1,24 +1,48 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 export default function Search() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {},
+  });
+
   const submitForm = (data) => {
     let queryString = '';
     queryString += `${data.searchBy}=true`;
-    queryString += `${geoLocation ? `&geoLocation=${geoLocation}` : null}`;
-    queryString += `${medium ? `&medium=${medium}` : null}`;
-    queryString += `&isOnView=${isOnView}`;
-    queryString += `&isHighlight=${isHighlight}`;
-    queryString += `&q=${q}`;
+    queryString += `${data.geoLocation ? `&geoLocation=${data.geoLocation}` : ''}`;
+    queryString += `${data.medium ? `&medium=${data.medium}` : ''}`;
+    queryString += `&isOnView=${data.isOnView}`;
+    queryString += `&isHighlight=${data.isHighlight}`;
+    queryString += `&q=${data.q}`;
+
+    // undefined=true&isOnView=undefined&isHighlight=undefined&q=attack
+    router.push(`/artwork?${queryString}`);
   };
 
   return (
     <>
-      <Form>
+      <Form onSubmit={handleSubmit(submitForm)}>
         <Row>
           <Col>
             <Form.Group className='mb-3'>
               <Form.Label>Search Query</Form.Label>
-              <Form.Control type='text' placeholder='' name='q' />
+              <Form.Control
+                type='text'
+                placeholder=''
+                name='q'
+                className={errors.q ? 'is-invalid' : ''}
+                {...register('q', { required: true })}
+              />
             </Form.Group>
           </Col>
         </Row>

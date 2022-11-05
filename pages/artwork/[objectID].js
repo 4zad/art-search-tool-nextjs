@@ -6,7 +6,7 @@ import ArtworkCardDetail from '../../components/ArtworkCardDetail';
 
 export default function ObjectID() {
   let router = useRouter();
-  let { objectID } = router.query;
+  const { objectID } = router.query;
 
   return (
     <>
