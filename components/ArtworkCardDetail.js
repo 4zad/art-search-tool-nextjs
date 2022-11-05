@@ -1,15 +1,12 @@
 import useSWR from 'swr';
 
 import Error from 'next/error';
-import Link from 'next/link';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export default function ArtworkCardDetail(props) {
   const api = `https://collectionapi.metmuseum.org`;
   const urlRequest = `${api}/public/collection/v1/objects/${props.objectID}`;
   const { data, error } = useSWR(urlRequest);
-
-  console.log(urlRequest);
 
   return (
     <>
