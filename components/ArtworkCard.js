@@ -9,7 +9,7 @@ import { Button, Card } from 'react-bootstrap';
 
 export default function ArtworkCard(props) {
   const api = `https://collectionapi.metmuseum.org`;
-  const urlRequest = `/public/collection/v1/objects/${props.objectID}`;
+  const urlRequest = `${api}/public/collection/v1/objects/${props.objectID}`;
   const { data, error } = useSWR(urlRequest);
 
   return (
