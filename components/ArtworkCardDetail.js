@@ -13,7 +13,7 @@ export default function ArtworkCardDetail(props) {
       {error ? (
         <Error statusCode={404} />
       ) : data ? (
-        <Card style={{ width: '18rem' }}>
+        <Card>
           {data.primaryImage ? <Card.Img variant='top' src={data.primaryImage} /> : null}
           <Card.Body>
             <Card.Title>{data.title ? data.title : 'N/A'}</Card.Title>

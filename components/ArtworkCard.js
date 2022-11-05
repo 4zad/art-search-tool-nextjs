@@ -14,7 +14,7 @@ export default function ArtworkCard(props) {
       {error ? (
         <Error statusCode={404} />
       ) : data ? (
-        <Card style={{ width: '18rem' }}>
+        <Card>
           <Card.Img
             variant='top'
             src={`${
