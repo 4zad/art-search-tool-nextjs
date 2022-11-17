@@ -19,6 +19,8 @@ import Error from 'next/error';
 import { Card, Col, Pagination, Row } from 'react-bootstrap';
 import ArtworkCard from '../../components/ArtworkCard';
 
+import validObjectIDList from '../../public/data/validObjectIDList.json';
+
 const PER_PAGE = 12;
 
 export default function Artwork() {
@@ -53,6 +55,8 @@ export default function Artwork() {
         const chunk = data?.objectIDs.slice(i, i + PER_PAGE);
         results.push(chunk);
       }
+
+      let filteredResults = validObjectIDList.objectIDs.filter((id) => data.objectIDs?.includes(id));
 
       setArtworkList(results);
       setPage(1);
