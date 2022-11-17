@@ -2,33 +2,54 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 export default function MainNav(props) {
   const router = useRouter();
   const [searchField, setSearchField] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const submitSearchField = (e) => {
     e.preventDefault(); // prevent the browser from automatically submitting the form
-    router.push(`/artwork?title=true&q=${searchField}`);
+
+    setIsExpanded(false);
+
+    router.push(`/artwork?title=true&q=${searchString}`);
+  };
+
+  const toggleNavbar = () => {
+    setIsExpanded(!isExpanded);
   };
 
   return (
     <>
-      {/* <Navbar className='fixed-top navbar-light bg-light'></Navbar> {/* same as "NavBar" component below *\/} */}
-      <Navbar className='fixed-top' bg='light' variant='light'>
+      {/* <Navbar className='navbar navbar-expand-lg fixed-top navbar-light bg-light'></Navbar> {/* same as "NavBar" component below *\/} */}
+      <Navbar className='fixed-top' expand='lg' bg='light' variant='light' expanded={isExpanded} collapseOnSelect>
         <Container fluid>
           <Navbar.Brand href='/'>Muhammad Ahmed</Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbarScroll' />
-          <Navbar.Collapse id='navbarScroll'>
+          <Navbar.Toggle aria-controls='navbarScroll' onClick={toggleNavbar} />
+          <Navbar.Collapse id='collapse navbar-collapse navbarScroll'>
             <Nav className='me-auto'>
               <Link href='/' passHref legacyBehavior>
-                <Nav.Link>Home</Nav.Link>
+                <Nav.Link
+                  onClick={(e) => {
+                    setIsExpanded(false);
+                  }}
+                >
+                  Home
+                </Nav.Link>
               </Link>
               <Link href='/search' passHref legacyBehavior>
-                <Nav.Link>Advanced Search</Nav.Link>
+                <Nav.Link
+                  onClick={(e) => {
+                    setIsExpanded(false);
+                  }}
+                >
+                  Advanced Search
+                </Nav.Link>
               </Link>
             </Nav>
+            &nbsp;
             <Form
               className='d-flex'
               onChange={(e) => setSearchField(e.target.value)}
@@ -45,6 +66,7 @@ export default function MainNav(props) {
                 Search
               </Button>
             </Form>
+            &nbsp;
           </Navbar.Collapse>
         </Container>
       </Navbar>
