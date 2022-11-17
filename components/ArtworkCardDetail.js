@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { useAtom } from 'jotai';
+import { favoritesAtom } from '../store';
+
 import useSWR from 'swr';
 
 import Error from 'next/error';
@@ -5,8 +9,20 @@ import { Card } from 'react-bootstrap';
 
 export default function ArtworkCardDetail(props) {
   const api = `https://collectionapi.metmuseum.org`;
-  const urlRequest = `${api}/public/collection/v1/objects/${props.objectID}`;
+  const urlRequest = props.objectID ? `${api}/public/collection/v1/objects/${props.objectID}` : null;
   const { data, error } = useSWR(urlRequest);
+
+  const [favoritesList, setFavoritesList] = useAtom(favoritesAtom);
+  const [favorited, setFavorited] = useState(favoritesList.includes(props.objectID) ? true : false);
+
+  const toggleFavorites = () => {
+    if (favorited) {
+      setFavoritesList((current) => current.filter((favorite) => favorite != props.objectID));
+    } else {
+      setFavoritesList((current) => [...current, props.objectID]);
+    }
+    setFavorited(!favorited);
+  };
 
   return (
     <>
@@ -50,6 +66,11 @@ export default function ArtworkCardDetail(props) {
                 <strong>Dimensions: </strong>
                 {data.dimensions ? data.dimensions : 'N/A'}
               </p>
+              <br />
+              <br />
+              <button variant={favorited ? 'primary' : 'outline-primary'} onClick={toggleFavorites}>
+                {favorited ? '+ Favorite (added)' : '+ Favorite'}
+              </button>
             </Card.Text>
           </Card.Body>
         </Card>
