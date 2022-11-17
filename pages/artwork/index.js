@@ -49,14 +49,15 @@ export default function Artwork() {
 
   useEffect(() => {
     if (data) {
-      // splitting the data recieved from API fetch into separate arrays of length of items on each page, 'PER_PAGE'
+      // filtering data recieved from API fetch for only valid object IDs
+      let filteredResults = validObjectIDList.objectIDs.filter((id) => data.objectIDs?.includes(id));
+
+      // splitting the data recieved from 'filteredResults' into separate arrays of length of items on each page, 'PER_PAGE'
       let results = [];
-      for (let i = 0; i < data?.objectIDs?.length; i += PER_PAGE) {
-        const chunk = data?.objectIDs.slice(i, i + PER_PAGE);
+      for (let i = 0; i < filteredResults?.length; i += PER_PAGE) {
+        const chunk = filteredResults?.slice(i, i + PER_PAGE);
         results.push(chunk);
       }
-
-      let filteredResults = validObjectIDList.objectIDs.filter((id) => data.objectIDs?.includes(id));
 
       setArtworkList(results);
       setPage(1);
