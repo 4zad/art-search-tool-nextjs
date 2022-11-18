@@ -67,6 +67,13 @@ export default function MainNav(props) {
               </Button>
             </Form>
             &nbsp;
+            <Nav>
+              <NavDropdown title='User Name' id='basic-nav-dropdown'>
+                <Link href='/favorites' passHref legacyBehavior>
+                  <NavDropdown.Item onClick={toggleNavbar}>Favorites</NavDropdown.Item>
+                </Link>
+              </NavDropdown>
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
