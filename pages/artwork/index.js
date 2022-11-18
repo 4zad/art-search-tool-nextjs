@@ -79,7 +79,8 @@ export default function Artwork() {
             ) : (
               <Card>
                 <Card.Body>
-                  <h4>Nothing Here</h4>
+                  <h4>No results found...</h4>
+                  <p>Try searching for something else.</p>
                 </Card.Body>
               </Card>
             )}

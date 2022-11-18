@@ -50,7 +50,8 @@ export default function Favorites() {
         ) : (
           <Card>
             <Card.Body>
-              <h4>Seems like there is nothing here yet... Try adding some new artwork to the list.</h4>
+              <h4>There is nothing here yet...</h4>
+              <p>Try adding some new artwork to the favorites list.</p>
             </Card.Body>
           </Card>
         )}
