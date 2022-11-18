@@ -5,7 +5,7 @@ import { favoritesAtom } from '../store';
 import useSWR from 'swr';
 
 import Error from 'next/error';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 export default function ArtworkCardDetail(props) {
   const api = `https://collectionapi.metmuseum.org`;
@@ -68,9 +68,9 @@ export default function ArtworkCardDetail(props) {
               </p>
               <br />
               <br />
-              <button variant={favorited ? 'primary' : 'outline-primary'} onClick={toggleFavorites}>
+              <Button variant={favorited ? 'outline-danger' : 'outline-light'} onClick={toggleFavorites}>
                 {favorited ? '+ Favorite (added)' : '+ Favorite'}
-              </button>
+              </Button>
             </Card.Text>
           </Card.Body>
         </Card>
