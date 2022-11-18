@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAtom } from 'jotai';
-import { favoritesAtom } from '../store';
+import { favoritesAtom } from '../globals/store';
 
 import useSWR from 'swr';
 

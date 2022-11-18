@@ -20,11 +20,10 @@ import { Card, Col, Pagination, Row } from 'react-bootstrap';
 import ArtworkCard from '../../components/ArtworkCard';
 
 import validObjectIDList from '../../public/data/validObjectIDList.json';
-
-const PER_PAGE = 12;
+import { PER_PAGE } from '../../globals/data';
 
 export default function Artwork() {
-  const [artworkList, setArtworkList] = useState(); // holds 2D array of values where each index in the outer array is a page and each index in the inner array is a artwork object ID number from the API call
+  const [artworkList, setArtworkList] = useState([]); // holds 2D array of values where each index in the outer array is a page and each index in the inner array is a artwork object ID number from the API call
   const [page, setPage] = useState(1); // holds current page number
 
   const router = useRouter();
