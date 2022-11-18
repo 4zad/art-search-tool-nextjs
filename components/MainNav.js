@@ -14,7 +14,7 @@ export default function MainNav(props) {
 
     setIsExpanded(false);
 
-    router.push(`/artwork?title=true&q=${searchString}`);
+    router.push(`/artwork?title=true&q=${searchField}`);
   };
 
   const toggleNavbar = () => {
