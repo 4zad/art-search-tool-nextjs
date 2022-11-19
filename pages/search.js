@@ -1,9 +1,12 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useAtom } from 'jotai';
+import { searchHistoryAtom } from '../globals/store';
 
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 export default function Search() {
+  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
   const router = useRouter();
   const {
     register,
@@ -25,6 +28,7 @@ export default function Search() {
     queryString += `&q=${data.q}`;
 
     // undefined=true&isOnView=undefined&isHighlight=undefined&q=attack
+    setSearchHistory((current) => [...current, queryString]);
     router.push(`/artwork?${queryString}`);
   };
 

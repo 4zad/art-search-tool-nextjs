@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useAtom } from 'jotai';
+import { searchHistoryAtom } from '../globals/store';
 
 import Link from 'next/link';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
@@ -8,13 +10,16 @@ export default function MainNav(props) {
   const router = useRouter();
   const [searchField, setSearchField] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
+  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
 
   const submitSearchField = (e) => {
     e.preventDefault(); // prevent the browser from automatically submitting the form
-
     setIsExpanded(false);
 
-    router.push(`/artwork?title=true&q=${searchField}`);
+    let queryString = `title=true&q=${searchField}`;
+
+    setSearchHistory((current) => [...current, queryString]);
+    router.push(`/artwork?${queryString}`);
   };
 
   const toggleNavbar = () => {
