@@ -43,6 +43,10 @@ export default function History() {
   };
 
   useEffect(() => {
+    /*
+    NOTE: no if statement to check 'if (searchHistory.length > 0)' because the page needs to rerun the use effect even if the length of 'searchHistory' becomes 0 in order to have the page refresh automatically upon deletion of the last search history item and show that no more search history items  exist
+    */
+
     // splitting the 'searchHistory' into separate arrays of length of items on each page, 'PER_PAGE'
     let results = [],
       searchHistoryObjects = [];
