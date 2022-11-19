@@ -28,7 +28,7 @@ export default function Search() {
     queryString += `&q=${data.q}`;
 
     // undefined=true&isOnView=undefined&isHighlight=undefined&q=attack
-    setSearchHistory((current) => [...current, queryString]);
+    setSearchHistory((current) => [queryString, ...current]);
     router.push(`/artwork?${queryString}`);
   };
 

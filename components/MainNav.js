@@ -18,7 +18,7 @@ export default function MainNav(props) {
 
     let queryString = `title=true&q=${searchField}`;
 
-    setSearchHistory((current) => [...current, queryString]);
+    setSearchHistory((current) => [queryString, ...current]);
     router.push(`/artwork?${queryString}`);
   };
 
