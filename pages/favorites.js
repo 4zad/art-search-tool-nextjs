@@ -58,7 +58,7 @@ export default function Favorites() {
       </Row>
 
       <Row className='gy-4'>
-        {artworkList.length > 0 ? (
+        {artworkList.length > 1 ? (
           <Pagination /*size='lg'*/>
             <Pagination.Prev onClick={() => previousPage()} />
             <Pagination.Item active>{page}</Pagination.Item>

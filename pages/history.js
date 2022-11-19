@@ -43,25 +43,23 @@ export default function History() {
   };
 
   useEffect(() => {
-    if (searchHistory.length > 0) {
-      // splitting the 'searchHistory' into separate arrays of length of items on each page, 'PER_PAGE'
-      let results = [],
-        searchHistoryObjects = [];
+    // splitting the 'searchHistory' into separate arrays of length of items on each page, 'PER_PAGE'
+    let results = [],
+      searchHistoryObjects = [];
 
-      searchHistory.forEach((h) => {
-        let params = new URLSearchParams(h);
-        let entries = params.entries();
-        searchHistoryObjects.push(Object.fromEntries(entries));
-      });
+    searchHistory.forEach((h) => {
+      let params = new URLSearchParams(h);
+      let entries = params.entries();
+      searchHistoryObjects.push(Object.fromEntries(entries));
+    });
 
-      for (let i = 0; i < searchHistoryObjects.length; i += PER_PAGE) {
-        const chunk = searchHistoryObjects.slice(i, i + PER_PAGE);
-        results.push(chunk);
-      }
-
-      setParsedHistory(results);
-      setPage(1);
+    for (let i = 0; i < searchHistoryObjects.length; i += PER_PAGE) {
+      const chunk = searchHistoryObjects.slice(i, i + PER_PAGE);
+      results.push(chunk);
     }
+
+    setParsedHistory(results);
+    setPage(1);
   }, [searchHistory]);
 
   return (
@@ -103,7 +101,7 @@ export default function History() {
       </Row>
 
       <Row className='gy-4'>
-        {parsedHistory.length > 0 ? (
+        {parsedHistory.length > 1 ? (
           <Pagination /*size='lg'*/>
             <Pagination.Prev onClick={() => previousPage()} />
             <Pagination.Item active>{page}</Pagination.Item>
