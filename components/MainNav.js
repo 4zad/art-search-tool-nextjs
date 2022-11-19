@@ -77,6 +77,9 @@ export default function MainNav(props) {
                 <Link href='/favorites' passHref legacyBehavior>
                   <NavDropdown.Item onClick={toggleNavbar}>Favorites</NavDropdown.Item>
                 </Link>
+                <Link href='/history' passHref legacyBehavior>
+                  <NavDropdown.Item onClick={toggleNavbar}>History</NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
