@@ -38,7 +38,7 @@ export default function History() {
   };
 
   const nextPage = () => {
-    if (page < parsedHistory.length || !(data.length < PER_PAGE)) {
+    if (page < parsedHistory.length) {
       setPage((currentValue) => currentValue + 1);
     }
   };

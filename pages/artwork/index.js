@@ -41,7 +41,7 @@ export default function Artwork() {
   };
 
   const nextPage = () => {
-    if (page < artworkList.length || !(data.length < PER_PAGE)) {
+    if (page < artworkList.length) {
       setPage((currentValue) => currentValue + 1);
     }
   };
