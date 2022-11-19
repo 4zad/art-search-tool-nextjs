@@ -37,6 +37,7 @@ export default function MainNav(props) {
             <Nav className='me-auto'>
               <Link href='/' passHref legacyBehavior>
                 <Nav.Link
+                  active={router.pathname === '/'}
                   onClick={(e) => {
                     setIsExpanded(false);
                   }}
@@ -46,6 +47,7 @@ export default function MainNav(props) {
               </Link>
               <Link href='/search' passHref legacyBehavior>
                 <Nav.Link
+                  active={router.pathname === '/search'}
                   onClick={(e) => {
                     setIsExpanded(false);
                   }}
@@ -75,10 +77,14 @@ export default function MainNav(props) {
             <Nav>
               <NavDropdown title='User Name' id='basic-nav-dropdown'>
                 <Link href='/favorites' passHref legacyBehavior>
-                  <NavDropdown.Item onClick={toggleNavbar}>Favorites</NavDropdown.Item>
+                  <NavDropdown.Item active={router.pathname === '/favorites'} onClick={toggleNavbar}>
+                    Favorites
+                  </NavDropdown.Item>
                 </Link>
                 <Link href='/history' passHref legacyBehavior>
-                  <NavDropdown.Item onClick={toggleNavbar}>History</NavDropdown.Item>
+                  <NavDropdown.Item active={router.pathname === '/history'} onClick={toggleNavbar}>
+                    History
+                  </NavDropdown.Item>
                 </Link>
               </NavDropdown>
             </Nav>
