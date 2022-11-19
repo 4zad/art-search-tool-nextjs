@@ -6,8 +6,8 @@ import { searchHistoryAtom } from '../globals/store';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 export default function Search() {
-  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
   const router = useRouter();
+  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
   const {
     register,
     handleSubmit,
@@ -88,8 +88,8 @@ export default function Search() {
         <Row>
           <Col>
             <br />
-            <Button variant='primary' type='submit'>
-              Submit
+            <Button variant='outline-info' type='submit'>
+              Search
             </Button>
           </Col>
         </Row>
