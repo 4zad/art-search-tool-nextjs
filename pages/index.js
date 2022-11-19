@@ -1,6 +1,6 @@
-// import styles from '../styles/Home.module.css';
-
 import { Col, Image, Row } from 'react-bootstrap';
+
+// import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
