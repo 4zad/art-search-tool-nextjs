@@ -7,6 +7,8 @@ import { Button, Card, Col, ListGroup, Pagination, Row } from 'react-bootstrap';
 
 import { PER_PAGE } from '../globals/data';
 
+import styles from '../styles/History.module.css';
+
 export default function History() {
   const router = useRouter();
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom); // holds IDs of all search queries made
@@ -68,10 +70,15 @@ export default function History() {
         {parsedHistory.length > 0 ? (
           <ListGroup>
             {parsedHistory[page - 1].map((historyItem, index) => (
-              <ListGroup.Item key={index} action onClick={(e) => historyClicked(e, index)}>
+              <ListGroup.Item
+                key={index}
+                style={styles.historyListItem} // done using 'style' and not 'className' to ensure the css from the file overrides any conflicting css
+                action
+                onClick={(e) => historyClicked(e, index)}
+              >
                 {Object.keys(historyItem).map((key) => (
                   <>
-                    {key}: <strong>{historyItem[key]}</strong>&nbsp;
+                    <strong>{key}</strong>: {historyItem[key]},&nbsp;
                   </>
                 ))}
                 <Button
