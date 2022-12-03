@@ -62,7 +62,7 @@ export default function History() {
     setPage(1);
   }, [searchHistory]);
 
-  return !searchHistory ? null : (
+  return searchHistory.length == 0 ? null : (
     <>
       <Row className='gy-4'>
         {parsedHistory.length > 0 ? (

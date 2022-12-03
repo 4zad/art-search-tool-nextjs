@@ -38,7 +38,7 @@ export default function Favorites() {
     }
   }, [favoritesList]);
 
-  return !favoritesList ? null : (
+  return favoritesList.length == 0 ? null : (
     <>
       <Row className='gy-4'>
         {artworkList.length > 0 ? (
