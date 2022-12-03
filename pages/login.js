@@ -55,7 +55,7 @@ export default function Login(props) {
           />
         </Form.Group>
         <br />
-        <Button variant='primary' className='pull-right' type='submit'>
+        <Button variant='outline-info' className='pull-right' type='submit'>
           Login
         </Button>
         <br />
