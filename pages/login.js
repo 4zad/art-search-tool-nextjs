@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { useAtom } from 'jotai';
+import { favoritesAtom, searchHistoryAtom } from '../globals/store';
+
 import { authenticateUser } from '../lib/authenticate';
+import { getFavorites, getHistory } from '../lib/userData';
 
 import { Card, Form, Button, Alert } from 'react-bootstrap';
 
@@ -9,7 +13,15 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
   const [warning, setWarning] = useState('');
 
+  const [favoritesList, setFavoritesList] = useAtom(favoritesAtom); // holds IDs of all artwork in the favorites list
+  const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom); // holds IDs of all search queries made
+
   const router = useRouter();
+
+  async function updateAtoms() {
+    setFavoritesList(await getFavorites());
+    setSearchHistory(await getHistory());
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,6 +29,7 @@ export default function Login(props) {
 
     try {
       await authenticateUser(userName, password);
+      updateAtoms();
       router.push('/favorites');
     } catch (err) {
       //console.log(err.message)
