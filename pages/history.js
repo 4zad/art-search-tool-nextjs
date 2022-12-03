@@ -47,22 +47,24 @@ export default function History() {
     let results = [],
       searchHistoryObjects = [];
 
-    searchHistory.forEach((h) => {
-      let params = new URLSearchParams(h);
-      let entries = params.entries();
-      searchHistoryObjects.push(Object.fromEntries(entries));
-    });
+    if (searchHistory) {
+      searchHistory.forEach((h) => {
+        let params = new URLSearchParams(h);
+        let entries = params.entries();
+        searchHistoryObjects.push(Object.fromEntries(entries));
+      });
 
-    for (let i = 0; i < searchHistoryObjects.length; i += PER_PAGE) {
-      const chunk = searchHistoryObjects.slice(i, i + PER_PAGE);
-      results.push(chunk);
+      for (let i = 0; i < searchHistoryObjects.length; i += PER_PAGE) {
+        const chunk = searchHistoryObjects.slice(i, i + PER_PAGE);
+        results.push(chunk);
+      }
     }
 
     setParsedHistory(results);
     setPage(1);
   }, [searchHistory]);
 
-  return searchHistory.length == 0 ? null : (
+  return !searchHistory ? null : (
     <>
       <Row className='gy-4'>
         {parsedHistory.length > 0 ? (

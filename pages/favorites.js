@@ -28,9 +28,12 @@ export default function Favorites() {
     if (favoritesList.length > 0) {
       // splitting the 'favoritesList' into separate arrays of length of items on each page, 'PER_PAGE'
       let results = [];
-      for (let i = 0; i < favoritesList.length; i += PER_PAGE) {
-        const chunk = favoritesList.slice(i, i + PER_PAGE);
-        results.push(chunk);
+
+      if (favoritesList) {
+        for (let i = 0; i < favoritesList.length; i += PER_PAGE) {
+          const chunk = favoritesList.slice(i, i + PER_PAGE);
+          results.push(chunk);
+        }
       }
 
       setArtworkList(results);
@@ -38,7 +41,7 @@ export default function Favorites() {
     }
   }, [favoritesList]);
 
-  return favoritesList.length == 0 ? null : (
+  return !favoritesList ? null : (
     <>
       <Row className='gy-4'>
         {artworkList.length > 0 ? (
