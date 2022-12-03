@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 import { searchHistoryAtom } from '../globals/store';
 
-import { Button, Card, ListGroup, Pagination, Row } from 'react-bootstrap';
-
+import { removeFromHistory } from '../lib/userData';
 import { PER_PAGE } from '../globals/data';
+
+import { Button, Card, ListGroup, Pagination, Row } from 'react-bootstrap';
 
 import styles from '../styles/History.module.css';
 
@@ -19,15 +20,10 @@ export default function History() {
     router.push(`/artwork?${searchHistory[index]}`);
   };
 
-  const removeHistoryClicked = (e, index) => {
+  const removeHistoryClicked = async (e, index) => {
     e.stopPropagation(); // stop the event from trigging other events
 
-    setSearchHistory((current) => {
-      let history = [...current];
-      history.splice(index, 1);
-
-      return history;
-    });
+    setSearchHistory(await removeFromHistory(searchHistory[index]));
   };
 
   const previousPage = () => {
@@ -66,7 +62,7 @@ export default function History() {
     setPage(1);
   }, [searchHistory]);
 
-  return (
+  return !searchHistory ? null : (
     <>
       <Row className='gy-4'>
         {parsedHistory.length > 0 ? (
