@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { useAtom } from 'jotai';
 import { searchHistoryAtom } from '../globals/store';
 
+import { addToHistory } from '../lib/userData';
+
 import Link from 'next/link';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
@@ -12,13 +14,13 @@ export default function MainNav(props) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [searchHistory, setSearchHistory] = useAtom(searchHistoryAtom);
 
-  const submitSearchField = (e) => {
+  const submitSearchField = async (e) => {
     e.preventDefault(); // prevent the browser from automatically submitting the form
     setIsExpanded(false);
 
     let queryString = `title=true&q=${searchField}`;
 
-    setSearchHistory((current) => [queryString, ...current]);
+    setSearchHistory(await addToHistory(queryString));
     router.push(`/artwork?${queryString}`);
   };
 

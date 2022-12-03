@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useAtom } from 'jotai';
 import { searchHistoryAtom } from '../globals/store';
 
+import { addToHistory } from '../lib/userData';
+
 import { Button, Col, Form, Row } from 'react-bootstrap';
 
 export default function Search() {
@@ -18,7 +20,7 @@ export default function Search() {
     defaultValues: {},
   });
 
-  const submitForm = (data) => {
+  const submitSearchForm = async (data) => {
     let queryString = '';
     queryString += `${data.searchBy}=true`;
     queryString += `${data.geoLocation ? `&geoLocation=${data.geoLocation}` : ''}`;
@@ -28,13 +30,13 @@ export default function Search() {
     queryString += `&q=${data.q}`;
 
     // undefined=true&isOnView=undefined&isHighlight=undefined&q=attack
-    setSearchHistory((current) => [queryString, ...current]);
+    setSearchHistory(await addToHistory(queryString));
     router.push(`/artwork?${queryString}`);
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit(submitForm)}>
+      <Form onSubmit={handleSubmit(submitSearchForm)}>
         <Row>
           <Col>
             <Form.Group className='mb-3'>
