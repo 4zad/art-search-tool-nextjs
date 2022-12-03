@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { favoritesAtom } from '../globals/store';
 
 import useSWR from 'swr';
+import { addToFavorites, removeFromFavorites } from '../lib/userData';
 
 import Error from 'next/error';
 import { Card, Button } from 'react-bootstrap';
@@ -13,16 +14,20 @@ export default function ArtworkCardDetail(props) {
   const { data, error } = useSWR(urlRequest);
 
   const [favoritesList, setFavoritesList] = useAtom(favoritesAtom);
-  const [favorited, setFavorited] = useState(favoritesList.includes(props.objectID) ? true : false);
+  const [favorited, setFavorited] = useState(false);
 
-  const toggleFavorites = () => {
+  const toggleFavorites = async () => {
     if (favorited) {
-      setFavoritesList((current) => current.filter((favorite) => favorite != props.objectID));
+      setFavoritesList(await removeFromFavorites(props.objectID));
     } else {
-      setFavoritesList((current) => [...current, props.objectID]);
+      setFavoritesList(await addToFavorites(props.objectID));
     }
     setFavorited(!favorited);
   };
+
+  useEffect(() => {
+    setFavorited(favoritesList?.includes(props.objectID));
+  }, [favoritesList]);
 
   return (
     <>
